@@ -142,7 +142,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
 
    stage('Tagging Image for Testing')
    {
-       openshiftTag(namespace: '$APP_NAME-dev', srcStream: '$MS_NAME', srcTag: 'latest', destStream: '$MS_NAME', destTag: 'test')
+       openshiftTag(namespace: '$APP_NAME-dev-apps', srcStream: '$MS_NAME', srcTag: 'latest', destStream: '$MS_NAME', destTag: 'test-apps')
    }
 
    stage('Test - Deploy Application')
