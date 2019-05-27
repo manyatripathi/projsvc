@@ -1,0 +1,13 @@
+version: '2'
+services:
+    projsvc-app:
+        image: projsvc
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://projsvc-postgresql:5432/projsvc
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    projsvc-postgresql:
+        extends:
+            file: postgresql.yml
+            service: projsvc-postgresql

@@ -1,0 +1,5 @@
+APP_NAME: 'projmicroservices'
+MS_NAME: 'projsvc'
+BRANCH: 'master'
+GIT_SOURCE_URL: 'https://github.com/abhinav-goyall/projsvc.git'
+SONAR_HOST_URL: 'http://sonarqube-projmicroservices-devops.40.71.221.144.nip.io'
