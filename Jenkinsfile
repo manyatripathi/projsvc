@@ -130,15 +130,15 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
     }
 
 
-   stage('Dev - Build Application')
+  /* stage('Dev - Build Application')
    {
        buildApp("${APP_NAME}-dev-apps", "${MS_NAME}")
-   }
+   }*/
 
    stage('Dev - Deploy Application')
    {
        deployApp("${APP_NAME}-dev-apps", "${MS_NAME}")
-       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${APP_NAME}-dev-apps'
+       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true --overwrite=true -n=${APP_NAME}-dev-apps'
    }
 		
 
@@ -150,7 +150,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    stage('Test - Deploy Application')
    {
        deployApp("${APP_NAME}-test-apps", "${MS_NAME}")
-       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${APP_NAME}-test-apps'
+       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true --overwrite=true -n=${APP_NAME}-test-apps'
    }
 	
    node('selenium')
@@ -178,7 +178,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
     stage('Prod - Deploy Application')
     {
        deployApp("${APP_NAME}-prod-apps", "${MS_NAME}")
-        sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${APP_NAME}-prod-apps'
+        sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true --overwrite=true -n=${APP_NAME}-prod-apps'
     }	
  
 }
