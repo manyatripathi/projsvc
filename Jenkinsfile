@@ -89,6 +89,7 @@ node
    env.PATH="${env.PATH}:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
    
    stage('First Time Deployment'){
+       sh 'oc get all'
         readProperties()
         firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
         firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
