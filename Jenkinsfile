@@ -89,7 +89,7 @@ node
    env.PATH="${env.PATH}:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
    
    stage('First Time Deployment'){
-       sh 'oc get all'
+       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=projmicroservices-dev-apps'
         readProperties()
         firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
         firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
