@@ -69,6 +69,7 @@ def deployApp(projectName,msName){
     openshift.withCluster() {
         openshift.withProject(projectName){
             openshiftDeploy(namespace: projectName,deploymentConfig: msName)
+             
         }
     }
 }
@@ -89,7 +90,6 @@ node
    env.PATH="${env.PATH}:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
    
    stage('First Time Deployment'){
-       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=projmicroservices-dev-apps'
         readProperties()
         firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
         firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
@@ -138,6 +138,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    stage('Dev - Deploy Application')
    {
        deployApp("${APP_NAME}-dev-apps", "${MS_NAME}")
+       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${MS_NAME}'
    }
 		
 
@@ -149,6 +150,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    stage('Test - Deploy Application')
    {
        deployApp("${APP_NAME}-test-apps", "${MS_NAME}")
+       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${MS_NAME}'
    }
 	
    node('selenium')
@@ -176,6 +178,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
     stage('Prod - Deploy Application')
     {
        deployApp("${APP_NAME}-prod-apps", "${MS_NAME}")
+        sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true -n=${MS_NAME}'
     }	
  
 }
