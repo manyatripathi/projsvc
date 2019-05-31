@@ -138,7 +138,10 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    stage('Dev - Deploy Application')
    {
        deployApp("${APP_NAME}-dev-apps", "${MS_NAME}")
-      sh 'oc patch deploymentconfig --all -p '{"spec" {"template" {"metadata" {"annotations" {"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-dev-apps'
+      sh script: $/
+          oc patch deploymentconfig --all -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-dev-apps
+       /$
+       
    }
 		
 
