@@ -101,7 +101,7 @@ node
        checkout([$class: 'GitSCM', branches: [[name: "*/${BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: "${GIT_SOURCE_URL}"]]])
    }
 
-   stage('Initial Setup')
+  /* stage('Initial Setup')
    {
        sh 'mvn clean compile'
    }
@@ -129,7 +129,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
         sh 'mvn findbugs:findbugs'
     }
 
-
+*/
   /* stage('Dev - Build Application')
    {
        buildApp("${APP_NAME}-dev-apps", "${MS_NAME}")
@@ -139,7 +139,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    {
        deployApp("${APP_NAME}-dev-apps", "${MS_NAME}")
       sh script: $/
-          oc patch deploymentconfig --all -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-dev-apps
+          oc patch deploymentconfig ${MS_NAME} -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-dev-apps
        /$
        
    }
