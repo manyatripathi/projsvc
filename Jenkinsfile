@@ -101,7 +101,7 @@ node
        checkout([$class: 'GitSCM', branches: [[name: "*/${BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: "${GIT_SOURCE_URL}"]]])
    }
 
-  /* stage('Initial Setup')
+   stage('Initial Setup')
    {
        sh 'mvn clean compile'
    }
@@ -129,7 +129,7 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
         sh 'mvn findbugs:findbugs'
     }
 
-*/
+
   /* stage('Dev - Build Application')
    {
        buildApp("${APP_NAME}-dev-apps", "${MS_NAME}")
@@ -153,7 +153,9 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
    stage('Test - Deploy Application')
    {
        deployApp("${APP_NAME}-test-apps", "${MS_NAME}")
-       sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true --overwrite=true -n=${APP_NAME}-test-apps'
+         sh script: $/
+          oc patch deploymentconfig ${MS_NAME} -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-test-apps
+       /$
    }
 	
    node('selenium')
@@ -181,7 +183,9 @@ jacoco(deltaBranchCoverage: '10', deltaClassCoverage: '10', deltaComplexityCover
     stage('Prod - Deploy Application')
     {
        deployApp("${APP_NAME}-prod-apps", "${MS_NAME}")
-        sh 'oc annotate deploymentconfig --all sidecar.istio.io/inject=true --overwrite=true -n=${APP_NAME}-prod-apps'
+          sh script: $/
+          oc patch deploymentconfig ${MS_NAME} -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject": "true"}}}}}' -n=${APP_NAME}-prod-apps
+         /$
     }	
  
 }
