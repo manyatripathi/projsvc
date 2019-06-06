@@ -1,0 +1,28 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+ labels:
+  app: example-app
+ name: example-app
+spec:
+ replicas: 1
+ revisionHistoryLimit: 10
+ selector:
+  app: example-app
+  deploymentconfig: example-app
+ template:
+  metadata:
+   labels:
+    app: example-app
+    deploymentconfig: example-app
+  spec:
+   containers:
+   - name: example-app
+     image: vageesha99/aplha:v1
+     ports:
+     - containerPort: 8080
+       protocol: TCP
+     - containerPort: 8443
+       protocol: TCP
+     - containerPort: 8778
+       protocol: TCP
