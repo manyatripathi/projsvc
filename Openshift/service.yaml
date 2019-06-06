@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-app
+  labels:
+    app: example-app
+    team: backend
+spec:
+  selector:
+    app: example-app
+  ports:
+  - name: web
+    port: 8080
+  - port: 8088
+    name: prom
