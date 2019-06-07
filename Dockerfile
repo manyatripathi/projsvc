@@ -1,5 +1,6 @@
 FROM openjdk:8-jre-alpine
-ENV APP_FILE projsvc-0.0.1-SNAPSHOT.jar
+#ENV APP_FILE projsvc-0.0.1-SNAPSHOT.jar
+ENV APP_FILE /var/lib/jenkins/.m2/repository/pom/infy/projsvc/projsvc/0.0.1-SNAPSHOT/projsvc-0.0.1-SNAPSHOT.jar
 ENV APP_HOME /usr/app
 EXPOSE 8080
 COPY target/$APP_FILE $APP_HOME/
