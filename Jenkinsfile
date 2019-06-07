@@ -97,7 +97,9 @@ node
        /*  firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
         firstTimeProdDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-prod-apps", "${MS_NAME}")*/
    }
-   
+   stage('Tagging Image for Testing'){
+        openshiftTag(namespace: '$APP_NAME-dev-apps', srcStream: '$MS_NAME', srcTag: 'latest', destStream: '$MS_NAME', destTag: 'test')
+   }
    stage('Checkout')
    {
        checkout([$class: 'GitSCM', branches: [[name: "*/${BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: "${GIT_SOURCE_URL}"]]])
