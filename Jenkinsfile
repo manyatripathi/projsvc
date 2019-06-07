@@ -13,7 +13,8 @@ def readProperties(){
 def firstTimeDevDeployment(projectName,msName){
     openshift.withCluster() {
         openshift.withProject(projectName) {
-            def bcSelector = openshift.selector( "bc", msName)
+            openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
+          /*  def bcSelector = openshift.selector( "bc", msName)
             def bcExists = bcSelector.exists()
             if (!bcExists) {
                 openshift.newApp("redhat-openjdk18-openshift:1.1~${GIT_SOURCE_URL}","--strategy=dockerfile")
@@ -22,7 +23,7 @@ def firstTimeDevDeployment(projectName,msName){
                 openshiftTag(namespace: projectName, srcStream: msName, srcTag: 'latest', destStream: msName, destTag: 'prod-apps')
             } else {
                 sh 'echo build config already exists in development environment'  
-            } 
+            } */
         }
     }
 }
@@ -91,9 +92,9 @@ node
    
    stage('First Time Deployment'){
         readProperties()
-       openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
-      /*  firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
-        firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
+       
+       firstTimeDevDeployment("${APP_NAME}", "${MS_NAME}")
+       /*  firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
         firstTimeProdDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-prod-apps", "${MS_NAME}")*/
    }
    
