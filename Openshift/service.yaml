@@ -1,13 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: example-app
+  name: jmx-exporter
   labels:
-    app: example-app
+    app: jmx-exporter
     team: backend
 spec:
   selector:
-    app: example-app
+    app: jmx-exporter
   ports:
   - name: web
     port: 8080
