@@ -1,4 +1,4 @@
-APP_NAME: 'projmicroservices'
+APP_NAME: 'testjenkins'
 MS_NAME: 'projsvc'
 BRANCH: 'master'
 GIT_SOURCE_URL: 'https://github.com/abhinav-goyall/projsvc.git'
