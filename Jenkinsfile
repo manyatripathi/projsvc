@@ -92,6 +92,7 @@ node
    env.PATH="${env.PATH}:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
    
    stage('First Time Deployment'){
+       sh 'docker build .'
         readProperties()
        
        firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
