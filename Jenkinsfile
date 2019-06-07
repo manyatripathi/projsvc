@@ -13,6 +13,7 @@ def readProperties(){
 def firstTimeDevDeployment(projectName,msName){
     openshift.withCluster() {
         openshift.withProject(projectName) {
+             sh 'mvn clean compile'
             openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
           /*  def bcSelector = openshift.selector( "bc", msName)
             def bcExists = bcSelector.exists()
