@@ -93,7 +93,7 @@ node
    stage('First Time Deployment'){
         readProperties()
        
-       firstTimeDevDeployment("${APP_NAME}", "${MS_NAME}")
+       firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
        /*  firstTimeTestDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-test-apps", "${MS_NAME}")
         firstTimeProdDeployment("${APP_NAME}-dev-apps", "${APP_NAME}-prod-apps", "${MS_NAME}")*/
    }
