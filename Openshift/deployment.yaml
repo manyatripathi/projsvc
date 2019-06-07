@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: jmx-exporter
-        image: vageesha99/aplha:v1
+        image: vageesha99/alpha:v1
         ports:
         - name: web
           containerPort: 8080
