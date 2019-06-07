@@ -13,8 +13,8 @@ def readProperties(){
 def firstTimeDevDeployment(projectName,msName){
     openshift.withCluster() {
         openshift.withProject(projectName) {
-             sh 'docker build .'
-           // openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
+             
+            openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
           /*  def bcSelector = openshift.selector( "bc", msName)
             def bcExists = bcSelector.exists()
             if (!bcExists) {
@@ -92,7 +92,7 @@ node
    env.PATH="${env.PATH}:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
    
    stage('First Time Deployment'){
-       sh 'docker build .'
+       
         readProperties()
        
        firstTimeDevDeployment("${APP_NAME}-dev-apps", "${MS_NAME}")
