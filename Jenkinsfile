@@ -14,7 +14,7 @@ def firstTimeDevDeployment(projectName,msName){
     openshift.withCluster() {
         openshift.withProject(projectName) {
              
-            openshift.newApp("https://github.com/Vageesha17/projsvc","--strategy=docker")
+            openshift.startBuild("https://github.com/Vageesha17/projsvc","--strategy=docker")
           /*  def bcSelector = openshift.selector( "bc", msName)
             def bcExists = bcSelector.exists()
             if (!bcExists) {
