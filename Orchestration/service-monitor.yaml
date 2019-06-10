@@ -4,7 +4,7 @@ metadata:
   labels:
     k8s-app: backend-monitor
   name: backend-monitor
-  namespace: openshift-monitoring
+  namespace: ms-dev
 spec:
   endpoints:
     - interval: 30s
